@@ -1,11 +1,11 @@
 import codecs
-def fixed_xor(xor_string):
-    decoded_string=str(codecs.decode(xor_string,"hex"))
-    print(decoded_string)
-    fixed_string="686974207468652062756c6c277320657965"
-    return(int(xor_string,base=16) ^ int(fixed_string,base=16))
-
-xor_string="1c0111001f010100061a024b53535009181c"
-result=fixed_xor(hex(int(xor_string)))
-print(result)
-#Not working yet
+def xor(b1,b2):
+    b=bytearray(len(b1))
+    for i in range(0,len(b1)):
+        b[i]=b1[i] ^ b2[i]
+    return b
+input_string=bytearray.fromhex('1c0111001f010100061a024b53535009181c')
+against_string=bytearray.fromhex('686974207468652062756c6c277320657965')
+b=bytes(xor(input_string,against_string))
+print(codecs.encode(b,"hex"))
+print(b)
